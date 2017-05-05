@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -94,13 +95,20 @@ public class CheeseListFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(ViewHolder holder, final int position) {
             String cheeseString = mCheeseDataList.get(position);
 
             holder.mCheeseText.setText(cheeseString);
             Picasso.with(mContext)
                     .load(Cheeses.getRandomCheeseDrawable())
                     .into(holder.mAvatarView);
+
+            holder.mRootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext,"position clicked: " + position,Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
 
