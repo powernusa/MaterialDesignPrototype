@@ -2,10 +2,12 @@ package com.powernusa.andy.mycheese;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
             setupDrawerContent(navView);
         }
 
+        ViewPager vp = (ViewPager) findViewById(R.id.view_pager);
+        if(vp!=null){
+            setupViewPager(vp);
+        }
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(vp);
 
     }
 
@@ -57,17 +67,20 @@ public class MainActivity extends AppCompatActivity {
      * *********************************************************************************************
      */
 
-    private class CheeseFragmentPagerAdapter extends FragmentPagerAdapter{
-        private List<Fragment> mFragments;
-        private List<String> mFragmentTitles;
+    public class CheeseFragmentPagerAdapter extends FragmentPagerAdapter{
+        private List<Fragment> mFragments = new ArrayList<>();
+        private List<String> mFragmentTitles = new ArrayList<>();
 
         public CheeseFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         public void addFragment(Fragment fragment,String title){
-            mFragments.add(fragment);
-            mFragmentTitles.add(title);
+            if(fragment != null){
+                mFragments.add(fragment);
+                mFragmentTitles.add(title);
+            }
+
         }
 
         @Override
@@ -122,5 +135,13 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void setupViewPager(ViewPager vp){
+        CheeseFragmentPagerAdapter adapter = new CheeseFragmentPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new CheeseListFragment(),"Category 1");
+        adapter.addFragment(new CheeseListFragment(),"Category 2");
+        adapter.addFragment(new CheeseListFragment(),"Category 3");
+        vp.setAdapter(adapter);
     }
 }
