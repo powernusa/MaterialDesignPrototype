@@ -2,6 +2,7 @@ package com.powernusa.andy.mycheese;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -96,7 +97,7 @@ public class CheeseListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, final int position) {
-            String cheeseString = mCheeseDataList.get(position);
+            final String cheeseString = mCheeseDataList.get(position);
 
             holder.mCheeseText.setText(cheeseString);
             Picasso.with(mContext)
@@ -106,7 +107,10 @@ public class CheeseListFragment extends Fragment {
             holder.mRootView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext,"position clicked: " + position,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext,"position clicked: " + position,Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext,CheeseDetailActivity.class);
+                    intent.putExtra(CheeseDetailActivity.EXTRA_CHEESE_NAME,cheeseString);
+                    startActivity(intent);
                 }
             });
 

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);  //arrow sign appears
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * *********************************************************************************************
      *
-     * Initialization
+     * Initialization and setting up
      *
      *
      * *********************************************************************************************
