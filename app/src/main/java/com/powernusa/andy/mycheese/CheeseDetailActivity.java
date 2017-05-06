@@ -27,11 +27,21 @@ public class CheeseDetailActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-
+        String cheeseString = null;
         if(getIntent() != null){
-            String cheeseString = getIntent().getStringExtra(EXTRA_CHEESE_NAME);
+            cheeseString = getIntent().getStringExtra(EXTRA_CHEESE_NAME);
             //Toast.makeText(this,"Passed string: " + cheeseString,Toast.LENGTH_SHORT).show();
             getSupportActionBar().setTitle(cheeseString);
+        }
+
+        if(savedInstanceState==null){
+            //TODO: add fragment here
+            CheeseDetailFragment fragment = new CheeseDetailFragment();
+            Bundle args = new Bundle();
+            args.putString("ARG_CHEESE",cheeseString);
+            fragment.setArguments(args);
+            getSupportFragmentManager().beginTransaction().add(R.id.cheese_fragment_container,fragment).commit();
+
         }
 
         loadBackdrop((ImageView) findViewById(R.id.backdrop));
