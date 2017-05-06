@@ -36,7 +36,7 @@ public class CheeseDetailActivity extends AppCompatActivity {
         if(savedInstanceState==null){
             CheeseDetailFragment fragment = new CheeseDetailFragment();
             Bundle args = new Bundle();
-            args.putString("ARG_CHEESE",cheeseString);
+            args.putString(CheeseDetailFragment.ARG_CHEESE_NAME,cheeseString);
             fragment.setArguments(args);
             getSupportFragmentManager().beginTransaction().add(R.id.cheese_fragment_container,fragment).commit();
         }
